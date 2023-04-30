@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Kabra</title>
+      <link rel="stylesheet" href="./css/login.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="center">
+         <input type="checkbox" id="show">
+         <label for="show" class="show-btn">User Login</label>
+         <input type="checkbox" id="admin">
+         <label for="admin" class="admin">Admin Login</label>
+       
+         <div class="container">
+            <label for="show" class="close-btn fas fa-times" title="close"></label>
+            <div class="text">
+               User Login
+            </div>
+            <form action="#">
+               <div class="data">
+                  <label>Email or Phone</label>
+                  <input type="text" id="useremail" required>
+               </div>
+               <div class="data">
+                  <label>Password</label>
+                  <input type="password" id="userpass" required>
+               </div>
+               <div class="forgot-pass">
+                  <a href="#">Forgot Password?</a>
+               </div>
+               <div class="btn">
+                  <div class="inner"></div>
+                  <button type="submit" id="userlogin">login</button>
+               </div>
+               <div class="signup-link">
+                  Not a member? <a href="./userreg.html">Signup now</a>
+               </div>
+            </form>
+         </div>
+
+
+         <div class="container2">
+            <label for="admin" class="close-btn fas fa-times" title="close"></label>
+            <div class="text">
+               Admin Login
+            </div>
+            <form action="#">
+               <div class="data">
+                  <label>Email or Phone</label>
+                  <input type="text" id="email" required>
+               </div>
+               <div class="data">
+                  <label>Password</label>
+                  <input type="password" id="password" required>
+               </div>
+               <div class="forgot-pass">
+                  <a href="#">Forgot Password?</a>
+               </div>
+               <div class="btn">
+                  <div class="inner"></div>
+                  <button id="login" type="submit">login</button>
+               </div>
+               <div class="signup-link">
+                  Not a member? <a href="./adminreg.html">Signup now</a>
+               </div>
+            </form>
+         </div>
+      </div>
+
+
+      <script type="module">
+         // Import the functions you need from the SDKs you need
+         
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+         import { getDatabase } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+          
+          
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+         apiKey: "AIzaSyAJeFYXb_IQGtlJN6Yt_TXu6rm6qBPdln4",
+         authDomain: "kabra-electronics.firebaseapp.com",
+         databaseURL: "https://kabra-electronics-default-rtdb.firebaseio.com",
+         projectId: "kabra-electronics",
+         storageBucket: "kabra-electronics.appspot.com",
+         messagingSenderId: "4617723802",
+         appId: "1:4617723802:web:ee6ea38d4146b5b5446423",
+         measurementId: "G-M5Q8ZKD3XC"
+       };
+       // Initialize Firebase
+ 
+ const app =initializeApp(firebaseConfig);
+ const analytics = getAnalytics(app);
+ const database=getDatabase(app);
+ const auth = getAuth();
+ 
+ const signIn = document.getElementById('login');
+ signIn.addEventListener('click',(e)=>{
+   e.preventDefault();
+    var email=document.getElementById('email').value;
+    var password=document.getElementById('password').value;
+ 
+    
+ 
+ signInWithEmailAndPassword(auth, email, password).catch((error) => {
+   const errorCode = error.code;
+   const errorMessage = error.message;
+   alert(errorMessage)
+ }).then((userCredential) => {
+   // Signed in 
+ 
+   const user = userCredential.user;
+ if (user){
+   alert('Welcome you are logged in as admin')
+   
+   
+ }
+ window.location.href="./retrieve.html"
+ 
+ });
+ })
+ 
+        </script>
+
+<script type="module">
+   // Import the functions you need from the SDKs you need
+   
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+   import { getDatabase } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+   import { getAuth, onAuthStateChanged, signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+    
+    
+   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+   const firebaseConfig1 = {
+      apiKey: "AIzaSyAJeFYXb_IQGtlJN6Yt_TXu6rm6qBPdln4",
+      authDomain: "kabra-electronics.firebaseapp.com",
+      databaseURL: "https://kabra-electronics-default-rtdb.firebaseio.com",
+      projectId: "kabra-electronics",
+      storageBucket: "kabra-electronics.appspot.com",
+      messagingSenderId: "4617723802",
+      appId: "1:4617723802:web:ee6ea38d4146b5b5446423",
+      measurementId: "G-M5Q8ZKD3XC"
+    };
+   // Initialize Firebase
+
+const app1 =initializeApp(firebaseConfig1);
+const analytics1 = getAnalytics(app1);
+const database1=getDatabase(app1);
+const auth1 = getAuth();
+
+const signIn1 = document.getElementById('userlogin');
+signIn1.addEventListener('click',(e)=>{
+e.preventDefault();
+var email1=document.getElementById('useremail').value;
+var password1=document.getElementById('userpass').value;
+
+
+
+signInWithEmailAndPassword(auth1, email1, password1).catch((error) => {
+const errorCode = error.code;
+const errorMessage = error.message;
+alert(errorMessage)
+}).then((userCredential) => {
+// Signed in 
+
+const user1 = userCredential.user;
+if (user1){
+alert('Welcome you are logged in as user')
+
+
+}
+window.location.href="./index.html"
+
+});
+})
+
+  </script>
+    
+   </body>
+</html>

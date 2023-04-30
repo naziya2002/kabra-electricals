@@ -1,0 +1,142 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kabra</title>
+    <link rel="stylesheet" href="./css/contact.css" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <span class="big-circle"></span>
+      <img src="img/shape.png" class="square" alt="" />
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Kabra Electricals</h3>
+          <p class="text">
+            We Offer Low Prices,Fast Delivery, and Excellent Customer Service.Save Time and Money.
+          </p>
+
+          <div class="info">
+            <div class="information">
+              <img src="img/location.png" class="icon" alt="" />
+              <p>Borabanda,Allapur</p>
+            </div>
+            <div class="information">
+              <img src="img/email.png" class="icon" alt="" />
+              <p><a href="mailto:meghnakabra16@gmail.com
+                ">meghnakabra16@gmail.com
+              </a></p>
+            </div>
+            <div class="information">
+              <img src="img/phone.png" class="icon" alt="" />
+              <p>+91 93928 22282
+              </p>
+            </div>
+          </div>
+
+          <div class="social-media">
+            <p>Connect with us :</p>
+            <div class="social-icons">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href=" https://instagram.com/meghnakabra?igshid=ZDdkNTZiNTM=">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+
+          <form action="" method="post" autocomplete="off">
+            <h3 class="title">Contact us</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" id="name" placeholder="Username" />
+              <label for=""></label>
+              <span>Username</span>
+            </div>
+            <div class="input-container">
+              <input type="email" name="email" class="input" id="email" placeholder="Email"/>
+              <label for=""></label>
+              <span>Email</span>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" id="num" placeholder="Phone" />
+              <label for=""></label>
+              <span>Phone</span>
+            </div>
+            <div class="input-container textarea">
+              <textarea name="message" class="input" id="message" placeholder="Message"></textarea>
+              <label for=""></label>
+              <span>Message</span>
+            </div>
+            <input type="submit" name="submit" value="Send" class="btn" id="submit"/>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+      import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+    
+      const firebaseConfig = {
+        apiKey: "AIzaSyAJeFYXb_IQGtlJN6Yt_TXu6rm6qBPdln4",
+        authDomain: "kabra-electronics.firebaseapp.com",
+        databaseURL: "https://kabra-electronics-default-rtdb.firebaseio.com",
+        projectId: "kabra-electronics",
+        storageBucket: "kabra-electronics.appspot.com",
+        messagingSenderId: "4617723802",
+        appId: "1:4617723802:web:ee6ea38d4146b5b5446423",
+        measurementId: "G-M5Q8ZKD3XC"
+      };
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+    
+      const form = document.querySelector(".contact-form form");
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("num");
+      const messageInput = document.getElementById("message");
+      const submitButton = document.querySelector(".contact-form .btn");
+    
+      submitButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const message = messageInput.value.trim();
+    
+        // Get a reference to a new location and add the data
+        const newMessageRef = push(ref(database, 'messages'));
+        set(newMessageRef, { name, email, phone, message })
+          .then(() => {
+            alert("Message sent");
+            window.location.href = "./index.html";
+          })
+          .catch((error) => {
+            alert("Error sending message");
+            console.error(error);
+          });
+      });
+    </script>
+    
+
+    </body>
+</html>

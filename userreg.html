@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+    <link rel="stylesheet" href="./css/userreg.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Kabra</div>
+    <div class="content">
+      <form action="#">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" id="fullname" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" placeholder="Enter your username" id="username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" id="email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" id="num" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" placeholder="Enter your password" id="password" required>
+          </div>
+          <!-- <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="password" placeholder="Confirm your password" required>
+          </div> -->
+        </div>
+        <div class="gender-details">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+            <span class="dot one"></span>
+            <span class="gender">Male</span>
+          </label>
+          <label for="dot-2">
+            <span class="dot two"></span>
+            <span class="gender">Female</span>
+          </label>
+          <label for="dot-3">
+            <span class="dot three"></span>
+            <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input id="signUp" type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!--   // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBmGfgFGs_enBXrTvAThdWFw_vdUm5zvUI",
+    authDomain: "kabraelectronics-46529.firebaseapp.com",
+    databaseURL: "https://kabraelectronics-46529-default-rtdb.firebaseio.com",
+    projectId: "kabraelectronics-46529",
+    storageBucket: "kabraelectronics-46529.appspot.com",
+    messagingSenderId: "697763138685",
+    appId: "1:697763138685:web:003377ba47a8e70fa7b514",
+    measurementId: "G-CQCFGEGZ94"
+  }; -->
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js"></script> -->
+
+<!-- Add Firebase products that you want to use -->
+<!-- <script src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js"></script> -->
+
+<!-- <script type="module">
+  // Import the functions you need from the SDKs you need
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+  import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js"; // Import firestore module    
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword,signOut,createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+     
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBmGfgFGs_enBXrTvAThdWFw_vdUm5zvUI",
+    authDomain: "kabraelectronics-46529.firebaseapp.com",
+    databaseURL: "https://kabraelectronics-46529-default-rtdb.firebaseio.com",
+    projectId: "kabraelectronics-46529",
+    storageBucket: "kabraelectronics-46529.appspot.com",
+    messagingSenderId: "697763138685",
+    appId: "1:697763138685:web:003377ba47a8e70fa7b514",
+    measurementId: "G-CQCFGEGZ94"
+  };
+
+    // Initialize Firebase
+    const firebase = initializeApp(firebaseConfig);
+
+// Use Firebase services
+const database = getDatabase();
+const auth = getAuth();
+const analytics = getAnalytics();
+const app = initializeApp(firebaseConfig);
+// const db = firestore(app);
+
+
+// Get elements from the DOM
+const fullName = document.querySelector('input[type="text"][placeholder="Enter your name"]');
+const userName = document.querySelector('input[type="text"][placeholder="Enter your username"]');
+const email = document.querySelector('input[type="text"][placeholder="Enter your email"]');
+const phoneNumber = document.querySelector('input[type="text"][placeholder="Enter your number"]');
+const password = document.querySelector('input[type="password"][placeholder="Enter your password"]');
+const confirmPassword = document.querySelector('input[type="password"][placeholder="Confirm your password"]');
+const maleGender = document.getElementById('dot-1');
+const femaleGender = document.getElementById('dot-2');
+const preferNotToSayGender = document.getElementById('dot-3');
+const registerButton = document.querySelector('input[type="submit"][value="Register"]');
+
+// Handle register button click event
+registerButton.addEventListener('click', function(e) {
+  e.preventDefault(); // Prevent the form from submitting
+
+  // Validate form fields
+  if (fullName.value.trim() === '') {
+    alert('Please enter your full name.');
+    fullName.focus();
+    return;
+  }
+
+  if (userName.value.trim() === '') {
+    alert('Please enter your username.');
+    userName.focus();
+    return;
+  }
+
+  if (email.value.trim() === '') {
+    alert('Please enter your email.');
+    email.focus();
+    return;
+  }
+
+  if (phoneNumber.value.trim() === '') {
+    alert('Please enter your phone number.');
+    phoneNumber.focus();
+    return;
+  }
+
+  if (password.value.trim() === '') {
+    alert('Please enter your password.');
+    password.focus();
+    return;
+  }
+
+  if (confirmPassword.value.trim() === '') {
+    alert('Please confirm your password.');
+    confirmPassword.focus();
+    return;
+  }
+
+  if (password.value.trim() !== confirmPassword.value.trim()) {
+    alert('Passwords do not match.');
+    confirmPassword.focus();
+    return;
+  }
+
+  let genderValue = '';
+  if (maleGender.checked) {
+    genderValue = 'Male';
+  } else if (femaleGender.checked) {
+    genderValue = 'Female';
+  } else if (preferNotToSayGender.checked) {
+    genderValue = 'Prefer not to say';
+  } else {
+    alert('Please select your gender.');
+    return;
+  }
+
+  // Store user data to Firebase
+  const firebaseApp = firebase.initializeApp(firebaseConfig)
+  const db = firebase.firestore();
+  db.collection('users').add({
+    fullName: fullName.value.trim(),
+    userName: userName.value.trim(),
+    email: email.value.trim(),
+    phoneNumber: phoneNumber.value.trim(),
+    password: password.value.trim(),
+    gender: genderValue
+  }).then(function(docRef) {
+    // Register user with Firebase Authentication
+    const emailValue = email.value.trim();
+    const passwordValue = password.value.trim();
+    firebase.auth().createUserWithEmailAndPassword(emailValue, passwordValue)
+      .then(function() {
+        // Display success message and redirect to index.html
+        alert('You have been registered as a user!');
+        window.location.href = 'index.html';
+      })
+      .catch(function(error) {
+        // Display error message if user registration fails
+        alert('Error: ' + error.message);
+      });
+  })
+  .catch(function(error) {
+    // Display error message if user data storage fails
+    alert('Error: ' + error.message);
+  });
+});
+
+  </script> -->
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+  import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+
+  import { getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+ const firebaseConfig = {
+  apiKey: "AIzaSyAJeFYXb_IQGtlJN6Yt_TXu6rm6qBPdln4",
+  authDomain: "kabra-electronics.firebaseapp.com",
+  databaseURL: "https://kabra-electronics-default-rtdb.firebaseio.com",
+  projectId: "kabra-electronics",
+  storageBucket: "kabra-electronics.appspot.com",
+  messagingSenderId: "4617723802",
+  appId: "1:4617723802:web:ee6ea38d4146b5b5446423",
+  measurementId: "G-M5Q8ZKD3XC"
+};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database=getDatabase(app);
+const analytics = getAnalytics(app);
+const auth = getAuth();
+
+
+
+signUp.addEventListener('click',(e)=>{
+e.preventDefault();
+var email=document.getElementById('email').value;
+var password=document.getElementById('password').value;
+var username=document.getElementById('username').value;
+var fullname=document.getElementById('fullname').value;
+var num=document.getElementById('num').value;
+createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+// Signed in 
+const user = userCredential.user;
+
+set(ref(database,'user/'+user.uid),{
+fullname:fullname,
+username:username,
+email:email,
+num:num
+});
+
+alert("user created")
+
+})
+.catch((error) => {
+const errorCode = error.code;
+const errorMessage = error.message;
+alert(errorMessage)
+// ..
+});
+
+
+// ...
+
+})
+</script>
+
+
+
+
+</body>
+</html>
